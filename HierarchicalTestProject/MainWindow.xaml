@@ -1,0 +1,46 @@
+﻿<Window x:Class="HierarchicalTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+        xmlns:local="clr-namespace:HierarchicalTest"
+        Title="MainWindow" Height="350" Width="525">
+
+    <Window.Resources>
+        <ResourceDictionary>
+
+            <HierarchicalDataTemplate DataType="{x:Type local:GeneralClass}"  ItemsSource="{Binding Collection0}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="GeneralObject Name:"/>
+                    <TextBlock Text="{Binding Row.Name}"/>
+                </StackPanel>
+            </HierarchicalDataTemplate>
+
+            <HierarchicalDataTemplate DataType="{x:Type local:SubClass}" ItemsSource="{Binding Collection1}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="SubObject Name:"/>
+                    <TextBlock Text="{Binding Row.Name}"/>
+                </StackPanel>
+            </HierarchicalDataTemplate>
+
+            <DataTemplate DataType="{x:Type local:BaseClass}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="BaseObject Name:"/>
+                    <TextBlock Text="{Binding Row.Name}"/>
+                </StackPanel>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+
+        <dxg:TreeViewControl x:Name="TRVIEW"
+                             ItemsSource="{Binding G}"
+                             HighlightSelectedNodeIndent="False"
+                             TreeDerivationMode="HierarchicalDataTemplate"
+                             ShowExpandButtons="True">
+        </dxg:TreeViewControl>
+
+    </Grid>
+</Window>
